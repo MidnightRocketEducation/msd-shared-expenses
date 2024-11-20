@@ -21,12 +21,15 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun NavigationMethod() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "login") {
+    NavHost(navController = navController, startDestination = "signup") {
+        composable("signup") {
+            SignUpScreen(navController)
+        }
         composable("login") {
             LoginScreen(navController)
         }
-        composable("signup") {
-            SignUpScreen(navController)
+        composable("groupcreation") {
+            GroupCreation(navController)
         }
     }
 }

@@ -2,12 +2,14 @@ package com.github.midnightrocketeducation.se5.msd_shared_expenses
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 
@@ -51,5 +53,12 @@ fun SignUpScreen(navController: NavController) {
         ) {
             Text("Sign Up")
         }
+        Spacer(modifier = Modifier.height(8.dp))
+        Divider(
+            color = Color.Black,
+            thickness = 1.dp,
+            modifier = Modifier.padding(vertical = 8.dp)
+        )
+        Text("Already have an account")
     }
 }
