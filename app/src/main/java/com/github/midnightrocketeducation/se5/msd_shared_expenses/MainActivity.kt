@@ -7,6 +7,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.sun.xml.bind.v2.model.nav.Navigator
+import java.lang.reflect.Modifier
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,4 +34,8 @@ class MainActivity : ComponentActivity() {
             GroupCreation(navController)
         }
     }
+        composable("profile") {
+            ProfileScreen(navController)
+        }
+
 }
