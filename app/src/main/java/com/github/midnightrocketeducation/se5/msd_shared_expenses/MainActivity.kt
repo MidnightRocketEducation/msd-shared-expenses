@@ -31,5 +31,12 @@ class MainActivity : ComponentActivity() {
         composable("groupcreation") {
             GroupCreation(navController)
         }
+        composable("groups"){
+            GroupScreen(navController)
+        }
+        composable("settings"){
+            SettingsScreen(navController)
+        }
     }
 }
+

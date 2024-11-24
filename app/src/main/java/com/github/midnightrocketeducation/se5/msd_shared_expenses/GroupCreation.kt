@@ -62,6 +62,14 @@ fun GroupCreation(navComposable: NavController){
                 }
             }
         }
+        Button(
+            onClick = {
+                navController.navigate("groups")
+            },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Create")
+        }
     }
 }
 
