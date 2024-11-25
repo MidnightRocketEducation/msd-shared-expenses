@@ -1,6 +1,7 @@
 package com.github.midnightrocketeducation.se5.msd_shared_expenses
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -122,7 +123,11 @@ fun GroupDetailScreen(navController: NavController, groupName: String) {
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 items(members) { member ->
-                    MemberBalanceItem(member)
+                    MemberBalanceItem(
+                        member = member,
+                        navController = navController,
+                        groupName = groupName
+                    )
                 }
             }
 
@@ -165,11 +170,14 @@ fun ExpenseItem(expense: Expense) {
 }
 
 @Composable
-fun MemberBalanceItem(member: Member) {
+fun MemberBalanceItem(member: Member, navController: NavController, groupName: String) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 4.dp),
+            .padding(vertical = 4.dp)
+            .clickable {
+                navController.navigate("transfer/${groupName}")
+            },
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -189,7 +197,7 @@ fun MemberBalanceItem(member: Member) {
         }
         Text(
             "$${String.format("%.2f", member.balance)}",
-            color = Color.Red,
+            color = if (member.balance < 0) Color.Red else Color.Green,
             fontWeight = FontWeight.Bold
         )
     }

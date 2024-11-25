@@ -56,5 +56,14 @@ fun NavigationMethod() {
                 groupName = backStackEntry.arguments?.getString("groupName") ?: ""
             )
         }
+        composable(
+            route = "transfer/{groupName}",
+            arguments = listOf(navArgument("groupName") { type = NavType.StringType })
+        ) { backStackEntry ->
+            TransferScreen(
+                navController = navController,
+                groupName = backStackEntry.arguments?.getString("groupName") ?: ""
+            )
+        }
     }
 }
