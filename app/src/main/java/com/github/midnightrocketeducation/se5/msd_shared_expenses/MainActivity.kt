@@ -3,45 +3,67 @@ package com.github.midnightrocketeducation.se5.msd_shared_expenses
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.github.midnightrocketeducation.se5.msd_shared_expenses.ui.theme.MsdsharedexpensesTheme
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
-            MsdsharedexpensesTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+            NavigationMethod()
         }
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    MsdsharedexpensesTheme {
-        Greeting("Android")
+fun NavigationMethod() {
+    val navController = rememberNavController()
+    NavHost(navController = navController, startDestination = "signup") {
+        composable("signup") {
+            SignUpScreen(navController)
+        }
+        composable("login") {
+            LoginScreen(navController)
+        }
+        composable("groups") {
+            GroupScreen(navController)
+        }
+        composable("groupcreation") {
+            GroupCreation(navController)
+        }
+        composable("settings") {
+            SettingsScreen(navController)
+        }
+        composable(
+            route = "group_detail/{groupName}",
+            arguments = listOf(navArgument("groupName") { type = NavType.StringType })
+        ) { backStackEntry ->
+            GroupDetailScreen(
+                navController = navController,
+                groupName = backStackEntry.arguments?.getString("groupName") ?: ""
+            )
+        }
+        composable(
+            route = "add_expense/{groupName}",
+            arguments = listOf(navArgument("groupName") { type = NavType.StringType })
+        ) { backStackEntry ->
+            AddExpenseScreen(
+                navController = navController,
+                groupName = backStackEntry.arguments?.getString("groupName") ?: ""
+            )
+        }
+        composable(
+            route = "transfer/{groupName}",
+            arguments = listOf(navArgument("groupName") { type = NavType.StringType })
+        ) { backStackEntry ->
+            TransferScreen(
+                navController = navController,
+                groupName = backStackEntry.arguments?.getString("groupName") ?: ""
+            )
+        }
     }
 }
