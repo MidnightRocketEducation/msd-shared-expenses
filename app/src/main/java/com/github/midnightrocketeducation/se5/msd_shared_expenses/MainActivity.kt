@@ -39,10 +39,19 @@ fun NavigationMethod() {
             SettingsScreen(navController)
         }
         composable(
-            "group_detail/{groupName}",
+            route = "group_detail/{groupName}",
             arguments = listOf(navArgument("groupName") { type = NavType.StringType })
         ) { backStackEntry ->
             GroupDetailScreen(
+                navController = navController,
+                groupName = backStackEntry.arguments?.getString("groupName") ?: ""
+            )
+        }
+        composable(
+            route = "add_expense/{groupName}",
+            arguments = listOf(navArgument("groupName") { type = NavType.StringType })
+        ) { backStackEntry ->
+            AddExpenseScreen(
                 navController = navController,
                 groupName = backStackEntry.arguments?.getString("groupName") ?: ""
             )

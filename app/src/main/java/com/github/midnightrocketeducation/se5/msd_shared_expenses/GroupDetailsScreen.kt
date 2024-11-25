@@ -64,7 +64,9 @@ fun GroupDetailScreen(navController: NavController, groupName: String) {
         },
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { navController.navigate("add_expense") }
+                onClick = {
+                    navController.navigate("add_expense/${groupName}")
+                }
             ) {
                 Icon(Icons.Default.Add, "Add Expense")
             }
@@ -125,7 +127,9 @@ fun GroupDetailScreen(navController: NavController, groupName: String) {
             }
 
             Button(
-                onClick = { /* TODO: Add expense */ },
+                onClick = {
+                    navController.navigate("add_expense/${groupName}")
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 16.dp)

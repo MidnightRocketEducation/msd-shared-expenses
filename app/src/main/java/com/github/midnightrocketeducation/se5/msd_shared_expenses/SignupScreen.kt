@@ -60,7 +60,6 @@ fun SignUpScreen(navController: NavController) {
         Spacer(modifier = Modifier.height(16.dp))
         Button(
             onClick = {
-                // After successful signup, go directly to groups screen
                 navController.navigate("groups") {
                     popUpTo("signup") { inclusive = true }
                 }
