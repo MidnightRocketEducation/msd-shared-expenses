@@ -7,6 +7,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,6 +37,15 @@ fun NavigationMethod() {
         }
         composable("settings") {
             SettingsScreen(navController)
+        }
+        composable(
+            "group_detail/{groupName}",
+            arguments = listOf(navArgument("groupName") { type = NavType.StringType })
+        ) { backStackEntry ->
+            GroupDetailScreen(
+                navController = navController,
+                groupName = backStackEntry.arguments?.getString("groupName") ?: ""
+            )
         }
     }
 }
